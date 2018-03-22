@@ -48,7 +48,12 @@ def initGrid(dR, n):
     grid = np.full((n, n), float(3.14),float)
     
     print('>>Inicializando o grid.')
-    for i in range(n):
+    grid[0,0] = (dR[0] + dR[1])/2
+    grid[n-1,0] = (dR[1] + dR[2])/2
+    grid[n-1,n-1] = (dR[2] + dR[3])/2
+    grid[0, n-1] = (dR[3] + dR[0])/2
+    
+    for i in range(1,n-1):
         grid[i,0] = dR[0] # Parte esquerda
         grid[0,i] = dR[1] # Parte do topo
         grid[i,n-1] = dR[2] # Parte direita
@@ -81,7 +86,9 @@ def main():
     
     # Parte de visualização
     plt.title('Heat Distribution')
-    plt.imshow(grid, cmap='hot', interpolation='nearest')
+    plt.xlabel('Coluna do grid')
+    plt.ylabel('Linha do grid')
+    plt.imshow(grid, cmap='plasma', interpolation='nearest')
     plt.colorbar()
     plt.show()
 
