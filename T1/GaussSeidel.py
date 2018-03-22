@@ -1,5 +1,14 @@
 import numpy as np
 
+# Gets initial input x0
+def initialX(A, b):
+    n = len(b)
+    x0 = np.zeros(n,float)
+    for i in range(n):
+      x0[i] = (b[i]/A[i,i])
+        
+    return x0
+
 # Matrix A, vector b, initial input x, number of iterations t    
 # Returns the x(t) aproximation of the solution via gauss seidel
 def solve(A, b, xi, t):
@@ -14,8 +23,8 @@ def solve(A, b, xi, t):
     R = np.triu(A, k = 1)
     x = xi.copy()
     invL = np.linalg.inv(L)
-    for k in range(t):
-        x = np.dot(invL, b - np.dot(R, x))
-        print(k,x)
+    
+    for k in range(t): x = np.dot(invL, b - np.dot(R, x))
+    
     return x    
 
